@@ -4,7 +4,7 @@ use strict;
 
 use vars qw($VERSION @ISA);
 
-$VERSION = '0.02';
+$VERSION = '0.03';
 
 use Statistics::Frequency 0.03;
 @ISA = qw(Statistics::Frequency);
@@ -56,7 +56,8 @@ reference, in which keys the hash values are the frequencies.
     print Statistics::Shannon::evenness({ data }), "\n";
     print Statistics::Shannon::evenness({ data }, $base), "\n";
 
-The rest of data manipulation interface inherited from Statistics::Frequency:
+The rest of data manipulation interface inherited from
+Statistics::Frequency, see L<Statistics::Frequency>.
 
     $pop->add_data(@more_data);
     $pop->add_data(\@more_data);
@@ -80,10 +81,6 @@ index of data, which is a variability measure of data.
 The index() and evenness() interfaces are the only genuine interfaces
 of this module, the constructor and the rest of the data manipulation
 interface is inherited from Statistics::Frequency.
-
-Claude Elwood Shannon is known as the father of information theory:
-L<http://www-gap.dcs.st-and.ac.uk/~history/Mathematicians/Shannon.html>
-and L<http://www.bell-labs.com/news/2001/february/26/1.html>
 
 The Shannon index is also known as Shannon-Wiener index and
 as Shannon-Weaver index, especially when applied to biology
@@ -179,7 +176,27 @@ Copy all data from another object.  The old data is discarded.
 	
 Remove all data from the object.
 
+=head1 ERRORS
+
+The optional base given to index() and evenness() must naturally
+be greater than one.  If not, an error like
+
+    index: base cannot be <= 1.0
+
+will be thrown.
+
 =head1 SEE ALSO
+
+Claude Elwood Shannon is known as the father of information theory:
+L<http://www-gap.dcs.st-and.ac.uk/~history/Mathematicians/Shannon.html>
+and L<http://www.bell-labs.com/news/2001/february/26/1.html>
+
+For another variability index see
+
+L<Statistics::Simpson>
+
+For the data manipulation interface see (though the whole
+interface is documented here)
 
 L<Statictics::Frequency>
 
@@ -196,7 +213,7 @@ sub index {
     my ($self, $base) = @_;
     if (@_ == 2 && $base <= 1.0) {
 	require Carp;
-	croak("index: base cannot be <= 1.0");
+	Carp::croak("index: base cannot be <= 1.0");
     }
     $base ||= $Napier;
     my $shannon = 0;
@@ -236,7 +253,7 @@ sub evenness {
     my ($self, $base) = @_;
     if (@_ == 2 && $base <= 1.0) {
 	require Carp;
-	croak("evenness: base cannot be <= 1.0");
+	Carp::croak("evenness: base cannot be <= 1.0");
     }
     if (ref $self eq 'HASH') {
 	$self = [ values %$self ];

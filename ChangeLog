@@ -1,3 +1,11 @@
+Sat Sep  7 20:50:18 2002  Jarkko Hietaniemi  <jhi@iki.fi>
+
+	* The base(1)/evenness(1) tests were bogus.
+
+	* Even more documentation tweaks.
+
+	* Release 0.03.
+	
 Sat Sep  7 20:27:36 2002  Jarkko Hietaniemi  <jhi@iki.fi>
 
 	* Documentation tweaks.

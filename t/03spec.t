@@ -19,11 +19,11 @@ print $p1->index == 0 ?
 print defined $p1->evenness ?
   "not ok 4\n" : "ok 4\n";
 
-print !( eval { $p0->index(1) } ) &&
+print !( eval '$p0->index(1)' ) &&
       $@ =~ /index: base cannot be <= 1.0/ ?
-  "not ok 5\n" : "ok 5\n";
+  "ok 5\n" : "not ok 5\n";
 
-print !( eval { $p0->evenness(1) } ) &&
+print !( eval '$p0->evenness(1)' ) &&
       $@ =~ /evenness: base cannot be <= 1.0/ ?
-  "not ok 6\n" : "ok 6\n";
+  "ok 6\n" : "not ok 6\n";
 
