@@ -4,7 +4,7 @@ use strict;
 
 use vars qw($VERSION @ISA);
 
-$VERSION = '0.01';
+$VERSION = '0.02';
 
 use Statistics::Frequency 0.03;
 @ISA = qw(Statistics::Frequency);
@@ -74,9 +74,8 @@ The rest of data manipulation interface inherited from Statistics::Frequency:
 
 =head1 DESCRIPTION
 
-The Statistics::Shannon module can be used to compute the
-Shannon-Wiener index of data, which measures the variability
-of data.
+The Statistics::Shannon module can be used to compute the Shannon
+index of data, which is a variability measure of data.
 
 The index() and evenness() interfaces are the only genuine interfaces
 of this module, the constructor and the rest of the data manipulation
@@ -88,7 +87,7 @@ and L<http://www.bell-labs.com/news/2001/february/26/1.html>
 
 The Shannon index is also known as Shannon-Wiener index and
 as Shannon-Weaver index, especially when applied to biology
-and when talking about populations.
+and ecology and when talking about populations and biodiversity.
 
 =head2 new
 
@@ -97,7 +96,7 @@ and when talking about populations.
     my $pop = Statistics::Shannon->new(\%data);
     my $pop = Statistics::Shannon->new($another);
 
-Creates a new Shannon-Wiener object from the initial data.
+Creates a new Shannon object from the initial data.
 
 The data may be either a list, a reference to an array or a reference
 to a hash.
@@ -131,7 +130,7 @@ frequencies are used.
     $pop->index;
     $pop->index($base);
 
-Return the Shannon-Wiener index of the data.  The index is
+Return the Shannon index of the data.  The index is
 defined as
 
     $Shannon = -sum($p{$e}*log($p{$e})
